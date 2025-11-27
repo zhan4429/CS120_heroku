@@ -1,11 +1,12 @@
+require("dotenv").config();
 const http = require("http");
 const url = require("url");
 const MongoClient = require("mongodb").MongoClient;
-const dburl =
-  "mongodb+srv://yzhang85:571798@cluster0.cwimjhw.mongodb.net/?appName=Cluster0";
-
+// MongoDB connection URL from environment variable
+const dburl = process.env.MONGODB_URL;
 let port = process.env.PORT || 3000;
-// let port = 8080;
+console.log("Server listening on port " + port);
+//let port = 8080;
 
 http
   .createServer(async function (req, res) {
@@ -23,12 +24,10 @@ http
       res.end();
       // process page
     } else if (q.pathname == "/process") {
-      console.log("Processing request...");
       let userInput = q.query.place;
       const client = new MongoClient(dburl);
       try {
         await client.connect();
-        console.log("Connected to MongoDB.");
         let dbo = client.db("assignment");
         let collection = dbo.collection("places");
         // determine if input is zip code or place name
@@ -39,8 +38,12 @@ http
           result = await collection.findOne({ place: userInput });
         }
         if (result) {
+          // output result to the browser
           res.write("<br>Found place: " + result.place);
           res.write("<br>Zip codes: " + result.zips.join(", "));
+          // log the result to the console
+          console.log("Found place:", result.place);
+          console.log("Zip codes:", result.zips.join(", "));
         } else {
           res.write("<br>No matching place found.");
         }
