@@ -4,8 +4,8 @@ const MongoClient = require("mongodb").MongoClient;
 const dburl =
   "mongodb+srv://yzhang85:571798@cluster0.cwimjhw.mongodb.net/?appName=Cluster0";
 
-// let port = process.env.PORT || 3000;
-let port = 8080;
+let port = process.env.PORT || 3000;
+// let port = 8080;
 
 http
   .createServer(async function (req, res) {
