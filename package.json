@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/zhan4429/CS120_heroku#readme",
   "dependencies": {
-    "dotenv": "^17.2.3",
     "mongodb": "4.1"
   }
 }
