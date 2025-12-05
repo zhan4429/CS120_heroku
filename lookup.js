@@ -1,9 +1,9 @@
-require("dotenv").config();
 const http = require("http");
 const url = require("url");
 const MongoClient = require("mongodb").MongoClient;
 // MongoDB connection URL from environment variable
-const dburl = process.env.MONGODB_URL;
+const dburl =
+  "mongodb+srv://yzhang85:571798@cluster0.cwimjhw.mongodb.net/?appName=Cluster0";
 let port = process.env.PORT || 3000;
 console.log("Server listening on port " + port);
 //let port = 8080;
